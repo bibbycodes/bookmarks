@@ -15,10 +15,13 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 ENV['RACK_ENV'] = 'test'
 
+ENV['DB_NAME'] = 'bookmark_manager_test'
+
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'web_helpers'
 Capybara.app = BookmarkManager
 
 RSpec.configure do |config|
