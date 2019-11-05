@@ -1,9 +1,13 @@
+require 'pg'
+
+
+
 class Bookmark
+
   def self.all
-    [
-      "http://www.makersacademy.com",
-      "http://www.google.com",
-      "http://www.github.com"
-    ]
+    conn = PG::Connection.open(:dbname => 'bookmark_manager')
+    res  = conn.exec('SELECT url FROM bookmarks')
+    res.values.flatten
   end
+
 end
