@@ -6,16 +6,16 @@ describe Bookmark do
       truncate_and_load_bookmarks
       bookmarks = Bookmark.all
 
-      expect(bookmarks).to include("http://www.makersacademy.com")
-      expect(bookmarks).to include("http://www.google.com")
-      expect(bookmarks).to include("http://www.askjeeves.com")
+      expect(bookmarks).to include(["http://www.makersacademy.com", "Makers Academy"])
+      expect(bookmarks).to include(["http://www.google.com", "Google"])
+      expect(bookmarks).to include(["http://www.askjeeves.com", "Ask Jeeves"])
     end
   end
 
   describe ".create" do
     it 'adds a new bookmark' do
-      Bookmark.create("http://www.theguardian.co.uk")
-      expect(Bookmark.all).to include("http://www.theguardian.co.uk")
+      Bookmark.create("http://www.theguardian.co.uk", "The Guardian")
+      expect(Bookmark.all).to include(["http://www.theguardian.co.uk", "The Guardian"])
     end
   end
 end

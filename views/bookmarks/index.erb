@@ -1,12 +1,49 @@
-<ul>
-  <% @bookmarks.each do |bookmark| %>
-    <li><a href="<%= bookmark %>"><%= bookmark %></li></a>
-    <% end %>
-</ul>
+<!DOCTYPE html>
 
-<form action="/bookmarks/add" method="post">
-  <label for="add_url">
-    <input type="text" name="new_url" placeholder="Enter Bookmark">
-  </label>
-  <input type="submit" value="Add">
-</form>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Bookmark Manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="navbar-item"><a href="/bookmarks">Home</a></li>
+          <li><a href="#">Sign up</a></li>
+          <li><a href="#">Sign in</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="list-group">
+        <% @bookmarks.each do |bookmark| %>
+        <%title = bookmark[1] %>
+        <%url = bookmark[0] %>
+        <a href="<%= url %>" class="list-group-item"> <p class="text-primary"><%= title %></p></a>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container">
+      <form action="/bookmarks/add" method="post">
+        <label for="new_url">
+          <input type="text" name="new_url"  placeholder="url">
+        </label>
+        <label for="new_title">
+          <input type="text" name="new_title" placeholder="title">
+        </label>
+        <input type="submit" value="Add Bookmark">
+      </form>
+    </div>
+
+  </body>
+</html>
