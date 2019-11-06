@@ -28,7 +28,12 @@
         <% @bookmarks.each do |bookmark| %>
         <%title = bookmark[1] %>
         <%url = bookmark[0] %>
-        <a href="<%= url %>" class="list-group-item"> <p class="text-primary"><%= title %></p></a>
+        <div class="list-group-item">
+          <a href="<%= url %>"><p class="text-primary"><%= title %></p></a>
+          <form action="/bookmarks/delete?url=<%= url %>" method="post">
+              <input type="submit" name="<%url%>" value="Delete" id="remove_<%= title.split(' ').join('_').downcase %>"/>
+          </form>
+        </div>
         <% end %>
       </div>
     </div>

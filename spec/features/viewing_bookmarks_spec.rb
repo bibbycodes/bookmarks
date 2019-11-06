@@ -6,6 +6,7 @@ feature 'Viewing bookmarks' do
 
   feature 'Veiwing bookmarks' do
     scenario 'A user can see bookmarks' do
+      truncate_and_load_bookmarks
       visit('/bookmarks')
 
       expect(page).to have_content("Makers Academy")
