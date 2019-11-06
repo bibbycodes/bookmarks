@@ -13,7 +13,6 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks/add' do
-    p params
     @new_url =  params[:new_url]
     @new_title = params[:new_title]
 

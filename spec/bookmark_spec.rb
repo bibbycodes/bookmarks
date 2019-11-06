@@ -18,4 +18,12 @@ describe Bookmark do
       expect(Bookmark.all).to include(["http://www.theguardian.co.uk", "The Guardian"])
     end
   end
+
+  describe ".delete" do
+    it 'deletes a specific bookmark' do
+      url = "http://www.makersacademy.com"
+      Bookmark.remove(url)
+      expect(Bookmark.all).to_not include(["http://www.makersacademy.com", "Makers Academy"])
+    end
+  end
 end
