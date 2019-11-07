@@ -7,9 +7,9 @@ describe Bookmark do
         truncate_and_load_bookmarks
         bookmarks = Bookmark.all
 
-        expect(bookmarks[0][1]).to eq("Makers Academy")
-        expect(bookmarks[1][1]).to eq("Google")
-        expect(bookmarks[2][1]).to eq("Ask Jeeves")
+        expect(bookmarks[0].title).to eq("Makers Academy")
+        expect(bookmarks[1].title).to eq("Google")
+        expect(bookmarks[2].title).to eq("Ask Jeeves")
       end
     end
 
@@ -17,7 +17,7 @@ describe Bookmark do
       it 'adds a new bookmark' do
         truncate_and_load_bookmarks
         guardian = Bookmark.create("http://www.theguardian.co.uk", "The Guardian")
-        expect(Bookmark.all).to include(["http://www.theguardian.co.uk", "The Guardian", guardian.id])
+        expect(Bookmark.all.last.title).to eq(guardian.title)
       end
     end
 
@@ -26,7 +26,18 @@ describe Bookmark do
         truncate_and_load_bookmarks
         guardian = Bookmark.create("http://www.theguardian.co.uk", "The Guardian")
         Bookmark.remove(guardian.id)
-        expect(Bookmark.all).to_not include(["http://www.theguardian.co.uk", "The Guardian", guardian.id])
+        expect(Bookmark.all).to_not include(guardian)
+      end
+    end
+
+    describe ".edit" do
+      it "edits a specific bookmark" do
+        truncate_and_load_bookmarks
+        bookmark_1 = Bookmark.create("http://www.thegardian.co.uk", "The Gardian")
+        bookmark_2 = gardian = Bookmark.create("http://www.theguardian.co.uk", "The Guardian")
+        Bookmark.edit("http://www.theguardian.co.uk", "The Guardian", bookmark_1.id)
+        expect(Bookmark.all.last.url).to eq("http://www.theguardian.co.uk")
+        expect(Bookmark.all.last.url).not_to eq("http://www.thegardian.co.uk")
       end
     end
   end

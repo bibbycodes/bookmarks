@@ -26,13 +26,16 @@
     <div class="container">
       <div class="list-group">
         <% @bookmarks.each do |bookmark| %>
-        <%url = bookmark[0] %>
-        <%title = bookmark[1] %>
-        <%id = bookmark[2] %>
+        <%url = bookmark.url %>
+        <%title = bookmark.title %>
+        <%id = bookmark.id %>
         <div class="list-group-item">
           <a href="<%= url %>"><p class="text-primary"><%= title %></p></a>
           <form action="/bookmarks/delete/<%= id %>" method="post">
-              <input type="submit" name="<%id%>" value="Delete" id="remove_<%= title.split(' ').join('_').downcase %>"/>
+              <input type="submit" value="Delete" id="remove_<%= title.split(' ').join('_').downcase %>"/>
+          </form>
+          <form action="/bookmarks/edit/<%= id %>" method="get">
+              <input type="submit" value="Edit" id="edit_<%= title.split(' ').join('_').downcase %>"/>
           </form>
         </div>
         <% end %>
