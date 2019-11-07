@@ -29,7 +29,7 @@
       </div>
     </nav>  
 
-    <div class="container justify-content-end">
+    <div class="container">
         
         <div class="container mt-4">
           <ul class="list-group">
@@ -37,14 +37,14 @@
               <%url = bookmark.url %>
               <%title = bookmark.title %>
               <%id = bookmark.id %>
-              <li class="list-group-item bg-status"> 
-                <div class="">
-                  <a class ="ml-0 pl-0 float-left" href="<%= url %>"><p class="text-primary"><%= title %></p></a>
-                  <form class="float-right" action="/bookmarks/delete/<%= id %>" method="post">
-                      <input type="submit" value="Delete" id="remove_<%= title.split(' ').join('_').downcase %>"/>
+              <li class="list-group-item m-1 bg-light"> 
+                <div class="form-group">
+                  <a class ="ml-0 pl-0 float-left" href="<%= url %>"><p class="text-primary m-0"><%= title %></p></a>
+                  <form class="float-right form-label" action="/bookmarks/delete/<%= id %>" method="post">
+                      <input class="btn btn-danger pb-0 pt-0 ml-1" type="submit" value="Delete" id="remove_<%= title.split(' ').join('_').downcase %>"/>
                   </form>
-                  <form class="float-right" action="/bookmarks/edit/<%= id %>" method="get">
-                      <input type="submit" value="Edit" id="edit_<%= title.split(' ').join('_').downcase %>"/>
+                  <form class="float-right form-label" action="/bookmarks/edit/<%= id %>" method="get">
+                      <input class="btn btn-warning pb-0 pt-0" type="submit" value="Edit" id="edit_<%= title.split(' ').join('_').downcase %>"/>
                   </form>   
                 </div>
               </li>
@@ -60,13 +60,11 @@
           <label for="new_title">
             <input type="text" name="new_title" placeholder="title">
           </label>
-          <input type="submit" value="Add Bookmark">
+          <input class="btn btn-success pb-0 pt-0 mb-1" type="submit" value="Add Bookmark">
         </form>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   </body>
 </html>
