@@ -6,7 +6,6 @@ describe Bookmark do
       it 'returns all bookmakrs' do
         truncate_and_load_bookmarks
         bookmarks = Bookmark.all
-
         expect(bookmarks[0].title).to eq("Makers Academy")
         expect(bookmarks[1].title).to eq("Google")
         expect(bookmarks[2].title).to eq("Ask Jeeves")
@@ -18,6 +17,16 @@ describe Bookmark do
         truncate_and_load_bookmarks
         guardian = Bookmark.create("http://www.theguardian.co.uk", "The Guardian")
         expect(Bookmark.all.last.title).to eq(guardian.title)
+      end
+
+      it "doesnt add an empty bookmark" do
+        truncate_and_load_bookmarks
+        expect{Bookmark.create("http://www.theguardian.co.uk", "")}.to raise_error("Please add a title")
+      end
+
+      it "doesnt add a bookmark with an invalid url" do
+        truncate_and_load_bookmarks
+        expect{Bookmark.create("", "The Guardian")}.to raise_error("Invalid URL")
       end
     end
 

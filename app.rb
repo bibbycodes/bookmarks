@@ -1,14 +1,17 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require './lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
   enable :sessions
+  
   get '/' do
     'Bookmark Manager'
   end
 
   get '/bookmarks' do
     @bookmarks = Bookmark.all
+    #flash[:keys] = "Helloo"
     erb(:'bookmarks/index')
   end
 

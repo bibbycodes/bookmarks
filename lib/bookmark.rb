@@ -1,5 +1,7 @@
 require 'pg'
 require 'sinatra/base'
+require "uri"
+require 'sinatra/flash'
 require_relative './setup_db'
 
 class Bookmark
@@ -14,6 +16,8 @@ class Bookmark
   end
 
   def self.create(url, title)
+    fail "Please add a title" if title == ""
+    fail "Invalid URL" unless url =~ URI::regexp
     req  = DatabaseConnection.query(
       "INSERT INTO bookmarks (url, title) 
       VALUES ('#{url}', '#{title}');")
