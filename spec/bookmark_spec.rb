@@ -19,14 +19,16 @@ describe Bookmark do
         expect(Bookmark.all.last.title).to eq(guardian.title)
       end
 
-      it "doesnt add an empty bookmark" do
+      it "checks if a title is empty" do
         truncate_and_load_bookmarks
-        expect{Bookmark.create("http://www.theguardian.co.uk", "")}.to raise_error("Please add a title")
+        expect(Bookmark.check_title("The Guardian")).to be(true)
+        expect(Bookmark.check_title("")).to be(false)
       end
 
-      it "doesnt add a bookmark with an invalid url" do
+      it "checks a url is valid" do
         truncate_and_load_bookmarks
-        expect{Bookmark.create("", "The Guardian")}.to raise_error("Invalid URL")
+        expect(Bookmark.check_url("")).to be(nil)
+        expect(Bookmark.check_url("http://www.theguardian.co.uk")).not_to be(nil)
       end
     end
 

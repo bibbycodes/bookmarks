@@ -16,8 +16,6 @@ class Bookmark
   end
 
   def self.create(url, title)
-    fail "Please add a title" if title == ""
-    fail "Invalid URL" unless url =~ URI::regexp
     req  = DatabaseConnection.query(
       "INSERT INTO bookmarks (url, title) 
       VALUES ('#{url}', '#{title}');")
@@ -50,6 +48,17 @@ class Bookmark
     @url = url
     @title = title
     @id = id
+  end
+
+  private
+
+  def self.check_url(url)
+    url =~ URI::regexp
+  end
+
+  def self.check_title(title)
+    return true unless title == ""
+    return false
   end
 
 end
